@@ -58,6 +58,22 @@ export const handleOperator = (current, operator) => {
   return operator;
 };
 
+export const handleOperatorPress = (current, previousValue, operator, setOperator, setWaitingForOperand, setDisplay, setPreviousValue) => {
+  const inputValue = parseFloat(current);
+
+  if (previousValue === '') {
+    setPreviousValue(current);
+  } else if (operator && !setWaitingForOperand) {
+    const newValue = calculate(previousValue, inputValue, operator);
+    setDisplay(formatNumber(newValue));
+    setPreviousValue(newValue);
+  }
+
+  setOperator(operator);
+  setWaitingForOperand(true);
+};
+
+
 export const formatNumber = (num) => {
   if (num === 'Error') return 'Error';
   if (num === '') return '0';
