@@ -45,19 +45,15 @@ const Calculator = () => {
   };
 
   const handleOperator = (nextOperator) => {
-    const inputValue = parseFloat(display);
-
-    if (previousValue === '') {
-      setPreviousValue(display);
-    } else if (operator && !waitingForOperand) {
-      const inputValue = parseFloat(display);
-      const newValue = calculate(previousValue, inputValue, operator);
-      setDisplay(formatNumber(newValue));
-      setPreviousValue(newValue);
-    }
-
-    setOperator(nextOperator);
-    setWaitingForOperand(true);
+    handleOperatorPress(
+      display,
+      previousValue,
+      operator,
+      setOperator,
+      setWaitingForOperand,
+      setDisplay,
+      setPreviousValue
+    );
   };
 
   const handleEquals = () => {
